@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-using System.IO;
 using System.Threading;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -16,6 +15,9 @@ namespace TiConsoleUtils.SystemInfo.Commands
     {
         public class Settings : CommandSettings
         {
+            [CommandArgument(0, "<email>")]
+            public string Email { get; set; }
+            
             [CommandOption("-f|--filename")]
             [DefaultValue("dxdiag.log")]
             public string FileName { get; init; }
@@ -27,7 +29,7 @@ namespace TiConsoleUtils.SystemInfo.Commands
             
             Print("Please wait...", Color.Blue);
             
-            if (DxDiagMain.CreateDxDiagFile(settings.FileName) && SendEmail.SendMessage(Environment.UserName, settings.FileName))
+            if (DxDiagMain.CreateDxDiagFile(settings.FileName) && SendEmail.SendMessage(settings.Email, settings.FileName))
             {
                 Print("Done!", Color.Green);
                 return 0;

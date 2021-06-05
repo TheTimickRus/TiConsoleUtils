@@ -8,20 +8,20 @@ namespace TiConsoleUtils.SystemInfo.Backend.SendMessages
 {
     public static class SendEmail
     {
-        public static bool SendMessage(string id, string file = "")
+        public static bool SendMessage(string email, string file)
         {
             try
             {
                 var from = new MailAddress("TiConsoleUtils.SystemInfo@gmail.com", "TiConsoleUtils.SystemInfo");
-                var to = new MailAddress("andrey.timofeev.and37@gmail.com");
+                var to = new MailAddress(email);
                 var message = new MailMessage(from, to)
                 {
-                    Subject = $"{id} - TiConsoleUtils.SystemInfo",
-                    Body = $"<h1>TiConsoleUtils.SystemInfo. Система - {id}</h2>",
+                    Subject = $"{Environment.MachineName} - TiConsoleUtils.SystemInfo",
+                    Body = $"<h1>TiConsoleUtils.SystemInfo. Система - {Environment.UserName} ({Environment.MachineName})</h2>",
                     IsBodyHtml = true,
                 };
 
-                if (file != "" && File.Exists(file))
+                if (File.Exists(file))
                     message.Attachments.Add(new Attachment(file));
                 
                 var smtp = new SmtpClient("smtp.gmail.com", 587)

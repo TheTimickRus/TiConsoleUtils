@@ -13,10 +13,9 @@ namespace TiConsoleUtils.SystemInfo
                 configurator =>
                 {
                     configurator.Settings.ApplicationName = "TiConsoleUtils.SystemInfo";
-                    configurator.Settings.ApplicationVersion = "1.0";
+                    configurator.Settings.ApplicationVersion = "1.1,";
 
                     configurator.AddCommand<DxDiagCommand>("dxdiag");
-                    configurator.AddExample(new []{ "dxdiag", "-fsDxDiagFile.log"});
                 });
             
             app.Run(args);
